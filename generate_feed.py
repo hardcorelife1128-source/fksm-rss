@@ -36,9 +36,7 @@ class Articles(HTMLParser):
         attrs = dict(attrs)
         if tag == "a":
             self.current = article_id(attrs.get("href", ""))
-            self.parts = [attrs.get("title", "")]
-        elif tag == "img" and self.current:
-            self.parts.append(attrs.get("alt", ""))
+            self.parts = []
 
     def handle_data(self, data):
         if self.current:
@@ -47,7 +45,7 @@ class Articles(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "a" and self.current:
             title = " ".join(" ".join(self.parts).split())
-            if len(title) >= 6 and self.current not in self.items:
+            if len(title) >= 6 and (self.current not in self.items or len(title) > len(self.items[self.current])):
                 self.items[self.current] = title
             self.current = None
             self.parts = []
@@ -78,7 +76,7 @@ def build(html):
     if OUTPUT.exists():
         for item in ET.parse(OUTPUT).findall("./channel/item"):
             key = article_id(item.findtext("link", ""))
-            if key:
+            if key and item.findtext("title", "") not in ("헤드라인 기사 이미지", "기사 썸네일", "기사이미지", "기사 이미지"):
                 items[key] = item.findtext("title", "")
     items.update(parser.items)
     items = dict(sorted(items.items(), key=lambda pair: int(pair[0]), reverse=True)[:200])
@@ -105,4 +103,9 @@ def build(html):
 
 
 if __name__ == "__main__":
+    check = Articles()
+    check.feed('<a href="news/123"><img alt="헤드라인 기사 이미지"></a><a href="news/123">실제 기사 제목 확인</a>')
+    assert check.items == {"123": "실제 기사 제목 확인"}, check.items
+    assert article_id("https://example.com/news/123") is None
+    assert article_id("/news/view.php?idx=123") == "123"
     build(download())
