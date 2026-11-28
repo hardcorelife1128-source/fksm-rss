@@ -6,7 +6,7 @@
     <description>환경신문 홈페이지 기사 제목과 원문 링크. 공식 피드가 아닙니다.</description>
     <language>ko</language>
     <ttl>60</ttl>
-    <lastBuildDate>Sat, 28 Nov 2026 11:54:16 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 20:11:44 GMT</lastBuildDate>
     <item>
       <title>강원대병원, 2026 심포지엄 「발달장애 아동의 양육과 WHO-CST」 개최</title>
       <link>https://fksm.co.kr/news/79166</link>
@@ -406,6 +406,11 @@
       <title>광주지역 미세먼지 10년새 약 40%(43→26) 감소됐다</title>
       <link>https://fksm.co.kr/news/79087</link>
       <guid isPermaLink="true">https://fksm.co.kr/news/79087</guid>
+    </item>
+    <item>
+      <title>동구청, 서남동 인쇄거리, IBK희망디자인으로 새 단장</title>
+      <link>https://fksm.co.kr/news/79086</link>
+      <guid isPermaLink="true">https://fksm.co.kr/news/79086</guid>
     </item>
     <item>
       <title>경찰·소방 공동, 증가하는 유류 방화 잡는 첨단 ‘기체포집장치’ 활용 합동</title>
